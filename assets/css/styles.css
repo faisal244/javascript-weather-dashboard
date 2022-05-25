@@ -1,0 +1,13 @@
+:root{
+    --rich-black-fogra-29: #01161eff;
+    --midnight-green-eagle-green: #124559ff;
+    --teal-blue: #598392ff;
+    --cambridge-blue: #aec3b0ff;
+    --beige: #eff6e0ff;
+}
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
