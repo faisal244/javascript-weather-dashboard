@@ -23,45 +23,55 @@
     </head>
 
     <body>
-        <header>
+      <header>
         <nav class="navbar navbar-expand-lg navbar-light  navbar-bg">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">Navbar</a>
+              <a class="navbar-brand" href="#">Its Chucking it down!</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                   <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  <a class="nav-link" href="#">Features</a>
+                  <a class="nav-link" href="#">Second Menu Item</a>
 
                 </div>
               </div>
             </div>
           </nav>
-        </header>
+      </header>
+        
         <main>
-          <div class="jumbotron text-center">Banner
+          <div class="jumbotron text-center">
             <h1 class="display-4">Weather Dashboard</h1>
             <p class="lead">
-                a wonderful dashboard to find out when its raining 
+                A Machine learning powered predictive sky perspiration detection engine  
             </p>
+            <p>An interactive dashboard to find out if rain is coming after you this week</p>
             <hr class="my-4" />
             <button type="button" class="btn btn-success">
                 <i class="fa fa-plus me-1"></i>Add City
             </button>
-
           </div>
     
           
           <!-- content row -->
-          <div class="row">
+          <div class="row g-0">
 
-            <!-- col for form and recent searches -->
+            <!-- column for form and recent searches -->
             <div class="col-sm-12 col-md-3 border">
 
-              <!-- search form -->
-              <div>Form</div>
+              <!-- City search form -->
+              <form class="p-3" id="search-form">
+                <div class="mb-3">
+                  <h2 class="mt-3 text-center">Search For A City</h2>
+                  <input type="text" class="form-control" id="search-input" placeholder="Enter your city name">
+                </div>
+          
+                <div class="d-grid gap-2">
+                  <button class="btn btn-primary" type="button">Submit</button>
+                </div>                
+              </form>
     
               <!-- recent searches -->
               <div>Recent Searches</div>
