@@ -1,13 +1,27 @@
-:root{
-    --rich-black-fogra-29: #01161eff;
-    --midnight-green-eagle-green: #124559ff;
-    --teal-blue: #598392ff;
-    --cambridge-blue: #aec3b0ff;
-    --beige: #eff6e0ff;
+:root {
+  --rich-black-fogra-29: #01161eff;
+  --midnight-green-eagle-green: #124559ff;
+  --teal-blue: #598392ff;
+  --cambridge-blue: #aec3b0ff;
+  --beige: #eff6e0ff;
 }
-
 
 body {
-    font-family: 'Poppins', sans-serif;
-    font-family: 'Roboto', sans-serif;
+  font-family: "Poppins", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
+
+.navbar-bg {
+  background-color: var(--teal-blue);
+}
+
+.navbar-expand-lg .navbar-nav .nav-link{
+    color:var(--beige)
+}
+
+.jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #e9ecef;
+    border-radius: .3rem;
+  }
