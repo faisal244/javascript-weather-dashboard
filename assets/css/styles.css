@@ -31,6 +31,23 @@ body {
 
   }
 
+
+  .weather-icon {
+    width: 100px;
+    height: 100px;
+  }
   /* .current-weather-card {
     background-color var(--midnight-green)
   } */
+
+  .forecast-card {
+    width: 12rem;
+  }
+
+  @media screen and (max-width: 576px) {
+    
+    .forecast-card {
+      width: 100%;
+    }
+    
+  }
