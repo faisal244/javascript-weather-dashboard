@@ -18,9 +18,29 @@ const readFromLocalStorage = (key, defaultValue) => {
 const renderRecentSearches = () => {
 	// Get recent Search from local storage
 	const recentSearches = readFromLocalStorage("recentSearches", []);
+	// const recentSearches = ["London", "Leeds", "Birmingham"];
 
 	if (recentSearches.length) {
-		// ifrender recent search list
+		const createRecentCity = (city) => {
+			return `<li
+                        class="list-group-item border-top-0 border-end-0 border-start-0"
+                        data-city="${city}"
+                    >
+                        ${city}
+                    </li>`;
+		};
+
+		const recentCities = recentSearches.map(createRecentCity).join("");
+
+		console.log(recentCities);
+
+		// if render recent search list
+		const ul = `<ul class="list-group rounded-0">
+                    ${recentCities}
+                    </ul>`;
+
+		// Append to parent container
+		recentSearchesContainer.append(ul);
 	} else {
 		// else empty, show alert
 
@@ -42,19 +62,14 @@ const handleRecentSearchClick = (event) => {
 	if (target.is("li")) {
 		// get data city attribute
 		const cityName = target.attr("data-city");
+
+		// Remove the active class already applied to any cities in the search list
+		let searchedCity = document.querySelector(".active");
+		searchedCity.classList.remove("active");
+
 		// add active bootstrap class to clicked city
 		event.target.classList.add("active");
 		console.log(cityName);
-		// function that removes the active class from other cities in the recent searches list
-		activeCity();
-	}
-};
-
-const activeCity = () => {
-	var searchedCity = document.querySelector(".active");
-	// remove active class from all other cities in the list
-	if (searchedCity !== null) {
-		searchedCity.classList.remove("active");
 	}
 };
 
