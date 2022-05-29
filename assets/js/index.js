@@ -1,6 +1,8 @@
 // Target the parent
 const recentSearchesContainer = $("#recent-searches-container");
+const searchForm = $("#search-form");
 
+// reususable modular function to read from local storage
 const readFromLocalStorage = (key, defaultValue) => {
 	// get from LS using key name
 	const dataFromLS = localStorage.getItem(key);
@@ -13,6 +15,14 @@ const readFromLocalStorage = (key, defaultValue) => {
 	} else {
 		return defaultValue;
 	}
+};
+
+const writeToLocalStorage = (key, value) => {
+	// convert value to string
+	const stringifiedValue = JSON.stringify(value);
+
+	// set stringified value to LS for key cityName
+	localStorage.setItem(key, stringifiedValue);
 };
 
 const renderRecentSearches = () => {
@@ -73,10 +83,40 @@ const handleRecentSearchClick = (event) => {
 	}
 };
 
+const handleFormSubmit = (event) => {
+	event.preventDefault();
+
+	// // get form input value (city name)
+	const cityName = $("#search-input").val();
+
+	console.log("submit");
+
+	// validate
+	if (cityName) {
+		console.log(cityName);
+
+		// get recent seraches from localStorage
+		const recentSearches = readFromLocalStorage("recentSearches", []);
+
+		// push city name to array
+		recentSearches.push(cityName);
+
+		// write recent searches to LS
+		writeToLocalStorage("recentSearches", recentSearches);
+
+		// remove previous items
+		recentSearchesContainer.children().last().remove();
+
+		// re-render recent cities list
+		renderRecentSearches();
+	}
+};
+
 const onReady = () => {
 	console.log("READY");
 	renderRecentSearches();
 };
 
 recentSearchesContainer.click(handleRecentSearchClick);
+searchForm.submit(handleFormSubmit);
 $(document).ready(onReady);
