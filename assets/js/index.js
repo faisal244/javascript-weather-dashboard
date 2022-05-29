@@ -47,6 +47,19 @@ const fetchData = async (url, options = {}) => {
 	}
 };
 
+const getUviClassName = (uvi) => {
+	if (uvi >= 0 && uvi <= 2) {
+		return "bg-success";
+	}
+
+	if (uvi > 2 && uvi <= 8) {
+		return "bg-warning";
+	}
+	if (uvi > 8) {
+		return "bg-danger";
+	}
+};
+
 const renderCurrentData = (data) => {
 	const currentWeatherCard = `<div class="p-3">
     <div class="text-center">
@@ -95,9 +108,10 @@ const renderCurrentData = (data) => {
           UV Index
         </div>
         <div class="col-sm-12 col-md-8 p-2 border">
-          <span class="bg-success text-white px-3 rounded-2">${
+          <span class="text-white px-3 rounded-2 ${getUviClassName(
 						data.weatherData.current.uvi
-					}</span>
+					)}"
+                >${data.weatherData.current.uvi}</span>
         </div>
       </div>
     </div>
@@ -144,9 +158,10 @@ const renderForecastData = (data) => {
               UV Index
             </div>
             <div class="col-12 p-2 border">
-              <span class="bg-success text-white px-3 rounded-2"
-                >${each.uvi}</span
-              >
+              <span class="text-white px-3 rounded-2 ${getUviClassName(
+								each.uvi
+							)}"
+                     >${each.uvi}</span>
             </div>
           </div>
         </div>
@@ -209,18 +224,36 @@ const renderRecentSearches = () => {
 	}
 };
 
-const renderWeatherInfo = async (cityName) => {
-	// fetch weather data
-	const weatherData = await fetchWeatherData(cityName);
-
+const renderErrorAlert = () => {
 	// empty container
 	weatherInfoContainer.empty();
 
-	// render current data
-	renderCurrentData(weatherData);
+	const alert = `<div class="alert alert-danger" role="alert">
+    Something went wrong!! Please try again.
+  </div>`;
 
-	// render forecast data
-	renderForecastData(weatherData);
+	weatherInfoContainer.append(alert);
+};
+
+const renderWeatherInfo = async (cityName) => {
+	try {
+		// fetch weather data
+		const weatherData = await fetchWeatherData(cityName);
+
+		// empty container
+		weatherInfoContainer.empty();
+
+		// render current data
+		renderCurrentData(weatherData);
+
+		// render forecast data
+		renderForecastData(weatherData);
+
+		return true;
+	} catch (error) {
+		renderErrorAlert();
+		return false;
+	}
 };
 
 const fetchWeatherData = async (cityName) => {
@@ -261,7 +294,7 @@ const fetchWeatherData = async (cityName) => {
 	};
 };
 
-const handleRecentSearchClick = (event) => {
+const handleRecentSearchClick = async (event) => {
 	// console.log("clicked");
 	const target = $(event.target);
 
@@ -276,7 +309,9 @@ const handleRecentSearchClick = (event) => {
 
 		// add active bootstrap class to clicked city
 		event.target.classList.add("active");
-		console.log(cityName);
+		// console.log(cityName);
+
+		await renderWeatherInfo(cityName);
 	}
 };
 
@@ -291,23 +326,25 @@ const handleFormSubmit = async (event) => {
 	// validate
 	if (cityName) {
 		// render weather cards
-		await renderWeatherInfo(cityName);
+		const renderStatus = await renderWeatherInfo(cityName);
 
 		// get recentSearches from LS
 		const recentSearches = readFromLocalStorage("recentSearches", []);
 
-		// push city name to array
-		recentSearches.push(cityName);
+		if (!recentSearches.includes(cityName) && renderStatus) {
+			// push city name to array
+			recentSearches.push(cityName);
 
-		// write recent searches to LS
-		writeToLocalStorage("recentSearches", recentSearches);
+			// write recent searches to LS
+			writeToLocalStorage("recentSearches", recentSearches);
 
-		// remove previous items
-		recentSearchesContainer.children().last().remove();
+			// remove previous items
+			recentSearchesContainer.children().last().remove();
 
-		// re-render recent cities
-		renderRecentSearches();
-		handleRecentSearchClick();
+			// re-render recent cities
+			renderRecentSearches();
+			handleRecentSearchClick();
+		}
 	}
 };
 
