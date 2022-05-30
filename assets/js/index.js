@@ -65,8 +65,9 @@ const renderCurrentData = (data) => {
     <div class="text-center">
       <h2 class="my-2">${data.cityName}</h2>
       <h3 class="my-2">${moment
-				.unix(1652130296)
-				.format("dddd, Do MMM, YYYY")}</h3>
+				.unix(data.weatherData.current.dt + data.weatherData.timezone_offset)
+				.subtract({ hours: 1 })
+				.format("dddd, Do MMM, YYYY HH:mm:ss")}</h3>
       <div>
         <img
           src="http://openweathermap.org/img/w/${
@@ -343,7 +344,7 @@ const handleFormSubmit = async (event) => {
 
 			// re-render recent cities
 			renderRecentSearches();
-			handleRecentSearchClick();
+			await handleRecentSearchClick();
 		}
 	}
 };
