@@ -1,8 +1,8 @@
-# Weather Dashboard
+# JavaScript Weather Dashboard
 
 Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Developers are often tasked with retrieving data from another application's API and using it in the context of their own.
 
-I was tasked with building a weather dashboard that could run in the browser and feature dynamically updated HTML and CSS. This dashboard uses the [OpenWeather One Call API](https://openweathermap.org/api/one-call-api) to retrieve weather data for cities, and uses `localStorage` to store persistent data.
+I was tasked with building a weather dashboard that could run in the browser and features dynamically updated HTML and CSS. This dashboard uses the [OpenWeather One Call API](https://openweathermap.org/api/one-call-api) to retrieve weather data for cities, and uses `localStorage` to store persistent data.
 
 ## User Story
 
@@ -36,7 +36,7 @@ The following image shows the web application's appearance and functionality:
 
 ## Link to deployed application
 
-- ***
+- https://faisal244.github.io/javascript-weather-dashboard/
 
 ---
 
@@ -94,15 +94,15 @@ Below is an overview of the approach i took when working on the code and underly
 
 - I encountered an issue where if the user clicked on one of the cities in the recent searches list after doing a search, an error would be thrown in the console. I solved this by refactoring handleRecentSearchClick() so that it now no longer throws an error.
 
-The bug was caused by trying to use document.querySelector(".active") on content that was being dynamically rendered by JS. Moving to jQuery and using $(target).addClass("active").siblings().removeClass("active") resolved this issue.
+The bug was caused by trying to use `document.querySelector(".active")` on content that was being dynamically rendered by JS. Moving to jQuery and using `$(target).addClass("active").siblings().removeClass("active")` resolved this issue.
 
 - I wanted to display the local time in the city the user had searched for instead of the time in their current timezone. The solution i implemented involved combining 2 different pieces of data from moment.js:
 
-- .unix(data.weatherData.current.dt + data.weatherData.timezone_offset)
+- `.unix(data.weatherData.current.dt + data.weatherData.timezone_offset)`
 
 - I then encountered another issue where the time being displayed was consistently 1 hour behind the actual time. After some research i discovered that this was happening because daylight savings weren't being accounted for.
 
-- I resolved this by using another method from the moment.js API - .subtract({ hours: 1 })
+- I resolved this by using another method from the moment.js API - `.subtract({ hours: 1 })`
   Once this was added the local time that is displayed is now correct no matter which country the user searches for
 
 ---
@@ -139,5 +139,3 @@ The bug was caused by trying to use document.querySelector(".active") on content
 - Google Fonts
 - Font Awesome
 - OpenWeather One Call API
-
----

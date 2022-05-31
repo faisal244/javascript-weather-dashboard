@@ -75,7 +75,7 @@ const renderCurrentData = (data) => {
 				.format("dddd, Do MMM, YYYY HH:mm:ss")}</h3>
       <div>
         <img
-          src="http://openweathermap.org/img/w/${
+          src="https://openweathermap.org/img/w/${
 						data.weatherData.current.weather[0].icon
 					}.png"
           alt="weather icon"
@@ -132,7 +132,7 @@ const renderForecastData = (data) => {
 		const forecast = `<div class="card m-2 forecast-card forecast-cards-bg">
       <div class="d-flex justify-content-center">
         <img
-          src="http://openweathermap.org/img/w/${each.weather[0].icon}.png"
+          src="https://openweathermap.org/img/w/${each.weather[0].icon}.png"
           class="shadow-sm p-3 mt-3 bg-body rounded border card-img-top weather-icon"
           alt="weather icon"
         />
