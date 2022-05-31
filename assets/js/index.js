@@ -297,7 +297,7 @@ const fetchWeatherData = async (cityName) => {
 			lon: lon,
 			exclude: "minutely,hourly",
 			units: "metric",
-			appid: "8109f605d79877f7488a194794a29013",
+			appid: "5ecb90e18bea9914051a8dd07617a181",
 		}
 	);
 
@@ -331,8 +331,6 @@ const handleFormSubmit = async (event) => {
 
 	// // get form input value (city name)
 	const cityName = $("#search-input").val();
-
-	console.log("submit");
 
 	// validate
 	if (cityName) {
