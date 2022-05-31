@@ -32,9 +32,7 @@ THEN I am again presented with current and future conditions for that city
 
 The following image shows the web application's appearance and functionality:
 
-![The weather app includes a search option, a list of cities, and a five-day forecast and current weather conditions for Atlanta.](./Assets/06-server-side-apis-homework-demo.png)
-
----
+![The weather app includes a search option, a list of cities, and a five-day forecast and current weather conditions for the users searched city.](./assets/images/weather-dashboard-demo.gif)
 
 ## Link to deployed application
 
@@ -100,12 +98,12 @@ The bug was caused by trying to use document.querySelector(".active") on content
 
 - I wanted to display the local time in the city the user had searched for instead of the time in their current timezone. The solution i implemented involved combining 2 different pieces of data from moment.js:
 
-.unix(data.weatherData.current.dt + data.weatherData.timezone_offset)
+- .unix(data.weatherData.current.dt + data.weatherData.timezone_offset)
 
 - I then encountered another issue where the time being displayed was consistently 1 hour behind the actual time. After some research i discovered that this was happening because daylight savings weren't being accounted for.
 
-I resolved this by using another method from the moment.js API - .subtract({ hours: 1 })
-Once this was added the local time that is displayed is now correct no matter which country the user searches for
+- I resolved this by using another method from the moment.js API - .subtract({ hours: 1 })
+  Once this was added the local time that is displayed is now correct no matter which country the user searches for
 
 ---
 
@@ -117,6 +115,8 @@ Once this was added the local time that is displayed is now correct no matter wh
 
 - Re-building the weather cards to be more interactive using React
 
+---
+
 ## My Development Environment
 
 - MacOS Monterey
@@ -125,6 +125,8 @@ Once this was added the local time that is displayed is now correct no matter wh
 - Google Chrome Developer Tools
 - Git
 - Github
+
+---
 
 ## Languages, Libraries and APIs used
 
