@@ -1,4 +1,6 @@
 
-*.xml
 .DS_Store
+*.xml
+*.iml
 .idea/Weather-Dashboard.iml
+.vscode
