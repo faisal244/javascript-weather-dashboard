@@ -296,7 +296,6 @@ const fetchWeatherData = async (cityName) => {
 };
 
 const handleRecentSearchClick = async (event) => {
-	// console.log("clicked");
 	const target = $(event.target);
 
 	// restrict clicks to only from li items
@@ -304,13 +303,8 @@ const handleRecentSearchClick = async (event) => {
 		// get data city attribute
 		const cityName = target.attr("data-city");
 
-		// Remove the active class already applied to any cities in the search list
-		let searchedCity = document.querySelector(".active");
-		searchedCity.classList.remove("active");
-
-		// add active bootstrap class to clicked city
-		event.target.classList.add("active");
-		// console.log(cityName);
+		// add active bootstrap class to clicked city, remove it from siblings
+		$(target).addClass("active").siblings().removeClass("active");
 
 		await renderWeatherInfo(cityName);
 	}
@@ -318,6 +312,7 @@ const handleRecentSearchClick = async (event) => {
 
 const handleFormSubmit = async (event) => {
 	event.preventDefault();
+	await handleRecentSearchClick(event);
 
 	// // get form input value (city name)
 	const cityName = $("#search-input").val();
@@ -344,8 +339,8 @@ const handleFormSubmit = async (event) => {
 
 			// re-render recent cities
 			renderRecentSearches();
-			await handleRecentSearchClick();
 		}
+		// await handleRecentSearchClick(event);
 	}
 };
 
